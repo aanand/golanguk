@@ -88,7 +88,7 @@ lines = frames[0].split("\n")
 offsets = range(terminal_width - max(len(line) for line in lines))
 offsets = cycle(list(offsets) + list(reversed(offsets)))
 
-for (offset, i, frame) in zip(offsets, count(), cycle(frames)):
+for (offset, i, frame) in zip(offsets, count(), cycle(frames + list(reversed(frames)))):
     stringio = StringIO()
     stringio.write(banner)
     stringio.write("\n\n")
