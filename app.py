@@ -23,7 +23,8 @@ banner = """ ____            _               ____             _
   | |_____|__) | | | | | |  | |_|_|
   |_|    |____/|_| |_|_|_|   \__(_)"""
 
-gopher = """         ,_---~~~~~----._
+frames = [
+    """        ,_---~~~~~----._
   _,,_,*^____      _____``*g*\\"*,
  / __/ /'     ^.  /      \ ^@q   f
 [  @f | @))    |  | @))   l  0 _/
@@ -33,7 +34,41 @@ gopher = """         ,_---~~~~~----._
   ]            | | |            |
   ]             ~ ~             |
   |                            |
-   |                           |"""
+   |                           |""",
+    """        ,_---~~~~~----._
+  _,,_,*^____      _____``*g*\\"*,
+ / __/ /'     ^.  /      \ ^@q   f
+[  @f |  (@)   |  | (@)   l  0 _/
+ \`/   \~____ / __ \_____/    \\
+  |           _l__l_           I
+  }          [______]           I
+  ]            | | |            |
+  ]             ~ ~             |
+  |                            |
+   |                           |""",
+    """        ,_---~~~~~----._
+  _,,_,*^____      _____``*g*\\"*,
+ / __/ /'     ^.  /      \ ^@q   f
+[  @f |   (@)  |  |  (@)  l  0 _/
+ \`/   \~____ / __ \_____/    \\
+  |           _l__l_           I
+  }          [______]           I
+  ]            | | |            |
+  ]             ~ ~             |
+  |                            |
+   |                           |""",
+    """        ,_---~~~~~----._
+  _,,_,*^____      _____``*g*\\"*,
+ / __/ /'     ^.  /      \ ^@q   f
+[  @f |    @)) |  |   @)) l  0 _/
+ \`/   \~____ / __ \_____/    \\
+  |           _l__l_           I
+  }          [______]           I
+  ]            | | |            |
+  ]             ~ ~             |
+  |                            |
+   |                           |""",
+]
 
 
 def colourise(s, start):
@@ -49,17 +84,17 @@ def colourise(s, start):
 
 
 terminal_width = int(popen('stty size', 'r').read().split()[1])
-lines = gopher.split("\n")
+lines = frames[0].split("\n")
 offsets = range(terminal_width - max(len(line) for line in lines))
 offsets = cycle(list(offsets) + list(reversed(offsets)))
 
-for (offset, i) in zip(offsets, count()):
+for (offset, i, frame) in zip(offsets, count(), cycle(frames)):
     stringio = StringIO()
     stringio.write(banner)
     stringio.write("\n\n")
     stringio.write("\n".join(
         "".join(" " for _ in range(offset)) + line
-        for line in lines
+        for line in frame.split("\n")
     ))
     stringio.write("\n")
 
