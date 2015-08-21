@@ -1,5 +1,5 @@
-FROM python:3.4
+FROM frolvlad/alpine-python3
 ADD . /code
 WORKDIR /code
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
 
